@@ -1,18 +1,9 @@
-pipeline {
-    agent any
-    stages {
-        stage('SCM') {
-            steps {
-                git url: 'https://github.com/samiraamarhane/spring-boot-helloworld'
-            }
-        }
-        stage('build && SonarQube analysis') {
-            steps {
-                
-                        bat 'mvn clean package sonar:sonar'
-                    }
-                }
-            }
-        }
-       
+node {    
+       stage('SonarQube analysis') {
+       // requires SonarQube Scanner 2.8+
+       def scannerHome = tool 'SONAR_RUNNER';
+       withSonarQubeEnv('SonarQube') {
+            bat "\"${scannerHome}\\bin\\sonar-scanner.bat\""
+       }
+}
         
