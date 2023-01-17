@@ -1,0 +1,20 @@
+pipeline{
+stages{
+stage('git checkout'){
+steps{
+git 'https://github.com/samiraamarhane/spring-boot-helloworld'
+}
+}
+stage('build the app'){
+steps{
+bat 'mvn clean install'
+}
+
+}
+stage(SonarQube analysis){
+steps{
+bat 'mvn sonar:sonar'
+}
+}
+ 
+ }
