@@ -13,9 +13,9 @@ stage('build the application'){
     }
     
 }
-stage('Unit Test Execution') {
+stage('SonarQube analysis') {
 steps{
-bat 'mvn test'
+bat 'mvn sonar:sonar'
 }
 }
 
